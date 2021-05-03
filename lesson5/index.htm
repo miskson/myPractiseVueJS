@@ -7,8 +7,9 @@
     <body>
         <div id="app">
             <ul>
-                <li v-for="item in stock" v-bind:class="{'strike':!item.instock}" v-bind:href="stocklink">
-                    <a href="#" target="_blank">{{item.name}}</a>
+                <h2>List of items:</h2>
+                <li v-for="item in stock" v-bind:class="{'strike':!item.instock}" v-bind:class="link">
+                   <a :href="item.link" target="_blank">{{item.name}}</a>
                 </li>
             </ul>
         </div>
