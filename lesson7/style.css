@@ -1,0 +1,19 @@
+.lightbulb {
+    width: 100px;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 50px;
+    border-radius: 50%;
+    color: white;
+    box-shadow: 5px 5px 5px black;
+}
+
+.hehe {
+    visibility: hidden;
+}
+
+.inp {
+    background-color: white;
+    box-shadow: 5px 5px 10px white;
+    transition: 0.1s;
+}

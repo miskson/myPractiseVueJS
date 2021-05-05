@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lesson7_Vue_keyboardEvents</title>
+    <body>
+        <div id="app">
+            <h1>{{greet()}}</h1>
+            <label>input:</label>
+            <input class="inp" type="text" @keyup.esc=shutTheLights @keyup.113="turnTheLights" @keyup="randColor(); scream()">
+            <h2 class="headlinetwo">{{message}}</h2>
+            <div class="wrapper">
+                <div class="lightbulb">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+            </div>
+            <img class="hehe" src="img.jfif" alt="#">
+        </div> 
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script async src="app.js"></script>
+</html>
