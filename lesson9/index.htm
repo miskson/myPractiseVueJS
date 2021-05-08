@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Vue.js lesson9</title>
+    <body>
+        <div id="app">
+            <h1>{{title}}</h1>
+            <button @click="A++">add to a</button>
+            <button @click="B++">add to b</button>
+            <p>A: {{A}}</p>
+            <p>B: {{B}}</p>
+            <p>age + a = {{addToA}}</p>
+            <p>age + b = {{addToB}}</p>
+            <div class="currency window">
+                <label>UAH:</label>
+                <input type="number" v-model="UAH">
+                <span><- to UAH -></span>
+                <span>{{toUsd}} USD</span>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script async src="app.js"></script>
+</html>
