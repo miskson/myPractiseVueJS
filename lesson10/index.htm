@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Vue.js lesson10</title>
+    <body>
+        <div id="app">
+            <h1>{{title}}</h1>
+            <button @click="error = !error">Toggle error</button>
+            <button @click="success = !success">Toggle success</button>
+            <p v-if="error">here you can see error message</p>
+            <p v-else>here you can see default message</p>
+            <p v-show="success">here you can see success message</p>
+
+
+            <button @click="A++">add to a</button>
+            <button @click="B++">add to b</button>
+            <p>A: {{A}}</p>
+            <p>B: {{B}}</p>
+            <p>age + a = {{addToA}}</p>
+            <p>age + b = {{addToB}}</p>
+            <div class="currency window">
+                <label>UAH:</label>
+                <input type="number" v-model="UAH">
+                <span>
+                    <- to USD ->
+                </span>
+                <span v-if="toUsd != false">{{toUsd}} USD</span>
+                <span v-else="toUsd == false">unreal value of money amount</span>
+            </div>
+            <pre>
+                {{$data}}
+            </pre>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script async src="app.js"></script>
+</html>

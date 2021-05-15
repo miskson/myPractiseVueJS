@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>toDo</title>
+    <body>
+        <div id="app">
+            <ul>
+                <input type="text" @keyup.enter="addTask" v-model="currentTask">
+                <li 
+                    v-for="task in tasks"
+                    v-bind:class ="{'strike': task.isComleted}"
+                >
+                    <input 
+                        type="text" 
+                        @keyup.enter="editTask(task.text)" 
+                        v-if="task.isEdited" 
+                        v-model="editValue"
+                    >
+                    <span v-else @click = "task.isComleted = !task.isComleted">{{task.text}}</span>
+                    <button @click="removeTask(task.text)">remove</button>
+                    <button @click="changeEditing(task.text)">*</button>
+                </li>
+            </ul>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script async src="app.js"></script>
+</html>
