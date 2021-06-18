@@ -4,15 +4,15 @@
           <h1>EXCHANGER BUT OVERSIMLIFIED</h1>
           <div class="exchange__innerwrapper">
                 <h2>exchange from:</h2>
-                <input type="number" placeholder="curr to exchange" class="exchange__from" v-model="amount">
+                <input type="number" placeholder="curr to exchange" class="exchange__from" v-model="opInfo.amount">
                 <small v-if="error">err</small>
                 <h2>exchange to:</h2>
-                <input type="number"  placeholder="exchanged amount" class="exchange__to" v-model="exchanged">
-                <select name="select" v-model="current">
+                <input type="number"  placeholder="exchanged amount" class="exchange__to" v-model="opInfo.exchanged">
+                <select name="select" v-model="opInfo.current">
                     <option  v-for="currency in currencies" :key="currency">{{currency}}</option>
                 </select>
                 <small v-if="error2">err2</small>
-                <button class="exchange__button" :disabled="isDisabled">Exchange</button>
+                <button class="exchange__button" :disabled="opInfo.isDisabled" @click="onClick">Exchange</button>
           </div>
       </form>
   </div>
@@ -23,68 +23,72 @@ export default {
 
     data() {
         return {
-            amount: '',
-            exchanged: '',
             currencies: ['UAH', 'USD', 'EUR', 'BTC', 'ETH'],
-            current: 'USD',
             operation: 'toUsd',
             error: false,
             error2: false,
-            isDisabled: true,
             succes: false,
+
+            opInfo: {
+                amount: '',
+                exchanged: '',
+                current: 'USD',
+                isDisabled: true,
+                componentToCall: null,
+            }
         }
     },
     
     watch: {
-        amount: function (oldAmount, newAmount) {
-            if (this.amount <= 0 || this.amount == '') {
+        'opInfo.amount': function (oldAmount, newAmount) {
+            if (this.opInfo.amount <= 0 || this.opInfo.amount == '') {
                 console.log("error boi");
                 this.error = true;
-                this.isDisabled = true;
+                this.opInfo.isDisabled = true;
             } else {
                 this.error = false;
-                this.isDisabled = false;
+                this.opInfo.isDisabled = false;
             }
 
-            console.log(this.amount);
-            this.exchanged = this.amount;
+            console.log(this.opInfo.amount);
+            this.opInfo.exchanged = this.opInfo.amount;
             return this.exchange;
         },
 
-        current: function (oldCurrent, newCurrent) {
-            console.log(this.current);
-            if (this.current == 'USD') {
+        'opInfo.current': function (oldCurrent, newCurrent) {
+            console.log(this.opInfo.current);
+            if (this.opInfo.current == 'USD') {
                 this.operation = 'toUsd';
             }
-            if (this.current == 'UAH') {
+            if (this.opInfo.current == 'UAH') {
                 this.operation = 'toUah';
             }
-            if (this.current == 'EUR') {
+            if (this.opInfo.current == 'EUR') {
                 this.operation = 'toEur';
             }
-            if (this.current == 'BTC') {
+            if (this.opInfo.current == 'BTC') {
                 this.operation = 'toBtc';
             }
-            if (this.current == 'ETH') {
+            if (this.opInfo.current == 'ETH') {
                 this.operation = 'toEth';
             }
             
-            if (this.exchanged > 0 ) {
+            if (this.opInfo.exchanged > 0 ) {
                 return this.exchange;
             }
         },
 
-        exchanged: function (oldExchanged, newExchanged) {
-            if (this.exchanged <= 0 || this.exchanged == '') {
+        'opInfo.exchanged': function (oldExchanged, newExchanged) {
+            if (this.opInfo.exchanged <= 0 || this.opInfo.exchanged == '') {
                 console.log("error boi");
                 this.error2 = true;
-                this.isDisabled = true;
+                this.opInfo.isDisabled = true;
             } else {
-                this.isDisabled = false;
+                this.opInfo.isDisabled = false;
                 this.error2 = false;
             }
 
-            this.amount = this.exchanged;
+            this.opInfo.amount = this.opInfo.exchanged;
             return this.exchangeReversed;
         }
     },
@@ -95,13 +99,19 @@ export default {
         },
 
         exchange: function () {
-            this.exchanged = (this.amount / (this.storeCurrencies['UAH'][this.operation]));
+            this.opInfo.exchanged = (this.opInfo.amount / (this.storeCurrencies['UAH'][this.operation]));
         },
         
         exchangeReversed: function () {
-            this.amount = (this.amount * (this.storeCurrencies['UAH'][this.operation]));
-        }
+            this.opInfo.amount = (this.opInfo.amount * (this.storeCurrencies['UAH'][this.operation]));
+        },
+    },
 
+    methods: {
+        onClick: function() {
+            this.opInfo.componentToCall = 'MessagePopup';
+            this.$emit('getInfo', this.opInfo);
+        }
     }
 }
 </script>

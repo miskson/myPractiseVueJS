@@ -1,33 +1,30 @@
 <template>
   <div class="container">
     <div class="inner-window">
-      <h1>Loading...</h1>
+      <h1>Success window be like</h1>
+      <p>You've successfully exchanged {{this.info.amount}} UAH to {{this.info.exchanged}} {{this.info.current}}</p>
+      <button @click="closePopup">CLOSE</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    
     data() {
-      return {
-        transactionStatus: false,
-      }
+        return {
+            isOpened: true,
+        }
     },
 
-    mounted() {
-      setTimeout(() => {
-        this.transactionStatus = true;
-        console.log("server request imitation");
-        this.sendInfo();
-      }, 3000);
-    },
+    props: ['info'],
 
     methods: {
-      sendInfo: function () {
-        this.$emit('getStatus', this.transactionStatus);
-      }
+        closePopup: function () {
+            this.isOpened = false;
+            this.$emit('getPopupStatus', this.isOpened);
+        }
     }
+    
 }
 </script>
 
@@ -52,7 +49,7 @@ export default {
     justify-content: center;
   }
 
-  .inner-window h1 {
+  .inner-window h1, p {
       background-color: black;
       color: white;
       padding: 10px;
