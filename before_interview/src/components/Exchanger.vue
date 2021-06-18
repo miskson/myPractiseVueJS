@@ -30,13 +30,14 @@ export default {
             operation: 'toUsd',
             error: false,
             error2: false,
-            isDisabled: false,
+            isDisabled: true,
+            succes: false,
         }
     },
     
     watch: {
         amount: function (oldAmount, newAmount) {
-            if (this.amount < 0) {
+            if (this.amount <= 0 || this.amount == '') {
                 console.log("error boi");
                 this.error = true;
                 this.isDisabled = true;
@@ -74,7 +75,7 @@ export default {
         },
 
         exchanged: function (oldExchanged, newExchanged) {
-            if (this.exchanged < 0) {
+            if (this.exchanged <= 0 || this.exchanged == '') {
                 console.log("error boi");
                 this.error2 = true;
                 this.isDisabled = true;
@@ -86,10 +87,6 @@ export default {
             this.amount = this.exchanged;
             return this.exchangeReversed;
         }
-    },
-
-    methods: {
-        
     },
 
     computed: {
