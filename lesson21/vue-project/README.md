@@ -1,6 +1,7 @@
 # vue-project
 
 > test project on newly installed Ubuntu OS
+>new test line to try out commit via terminal
 
 ## Build Setup
 
