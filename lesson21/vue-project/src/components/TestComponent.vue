@@ -4,6 +4,7 @@
     <h2>{{value | to-upper}}</h2>
     <button @click="toLog">CLICK ME!</button>
     <input type="text" v-model="value">
+    <p>hello</p>
     
   </div>
 </template>
